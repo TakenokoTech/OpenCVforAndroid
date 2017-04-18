@@ -1,12 +1,11 @@
 package tech.takenoko.opencvforandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import org.opencv.android.OpenCVLoader;
-
-import tech.takenoko.opencvforandroid.opengl.OpenCVCamera;
+import tech.takenoko.opencvforandroid.utils.OpenCVCamera;
+import tech.takenoko.opencvforandroid.view.CameraView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,21 +14,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-
-        if(!OpenCVLoader.initDebug()){
-            Log.i("OpenCV", "Failed");
-        }else{
-            Log.i("OpenCV", "successfully built !");
-        }
-
-        openCVCamera = new OpenCVCamera(this);
-        openCVCamera.onCreate();
+        Intent intent = new Intent(MainActivity.this, CameraView.class);
+        startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        openCVCamera.onResume();
-    }
 }
