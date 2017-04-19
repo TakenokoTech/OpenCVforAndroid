@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CameraView"/>
+        <activity
+            android:name=".view.CameraView"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

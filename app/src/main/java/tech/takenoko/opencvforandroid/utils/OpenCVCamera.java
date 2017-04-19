@@ -1,9 +1,7 @@
 package tech.takenoko.opencvforandroid.utils;
 
 import android.app.Activity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.util.Log;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -13,7 +11,8 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-import tech.takenoko.opencvforandroid.R;
+import lombok.Getter;
+import tech.takenoko.opencvforandroid.model.OpenCVModel;
 
 /**
  * Created by takenoko on 2017/02/27.
@@ -21,48 +20,28 @@ import tech.takenoko.opencvforandroid.R;
 
 public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    private Activity activity;
-    private CameraBridgeViewBase mCameraView;
-    private Mat mOutputFrame;
-    private int threshold1 = 80;
+    @Getter
+    private OpenCVModel model = new OpenCVModel();
 
-    // VIEW
-    private TextView threshold1Text;
-    private Button threshold1UpButton;
-    private Button threshold1DownButton;
+    private Activity activity;
+    private Mat mOutputFrame;
+    private CameraBridgeViewBase mCameraView;
 
     //=======================================
     // CONSTRACTER
     //=======================================
-    public OpenCVCamera(Activity activity) {
+    public OpenCVCamera(Activity activity, CameraBridgeViewBase mCameraView) {
         this.activity = activity;
+        this.mCameraView = mCameraView;
+        canUseOpenCV();
+        onCreate();
     }
 
     //=======================================
     // LIFE SYCLE
     //=======================================
     public void onCreate() {
-        mCameraView = (CameraBridgeViewBase) activity.findViewById(R.id.camera_view);
         mCameraView.setCvCameraViewListener(this);
-
-        threshold1Text = (TextView)activity.findViewById(R.id.threshold1_text);
-        threshold1Text.setText(threshold1 + "");
-        threshold1UpButton = (Button)activity.findViewById(R.id.threshold1_up);
-        threshold1UpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                threshold1++;
-                threshold1Text.setText(threshold1 + "");
-            }
-        });
-        threshold1DownButton = (Button)activity.findViewById(R.id.threshold1_down);
-        threshold1DownButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                threshold1--;
-                threshold1Text.setText(threshold1 + "");
-            }
-        });
     }
 
     public void onResume() {
@@ -84,10 +63,16 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat rgba = inputFrame.rgba();
-        Imgproc.Canny(inputFrame.rgba(), mOutputFrame, threshold1, 100);
-//        Core.bitwise_not(mOutputFrame, mOutputFrame);
-        return mOutputFrame;
+        Mat mat = inputFrame.rgba();
+        Imgproc.Canny(mat, mOutputFrame, model.getThreshold1(), 100);
+//      Core.bitwise_not(mOutputFrame, mOutputFrame);
+        return mat;
+    }
+
+    private Mat Canny(Mat rgba) {
+        Mat mat = rgba;
+        Imgproc.Canny(mat, mOutputFrame, model.getThreshold1(), 100);
+        return mat;
     }
 
     //=======================================
@@ -107,4 +92,14 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
             }
         }
     };
+
+    public boolean canUseOpenCV() {
+        if(!OpenCVLoader.initDebug()){
+            Log.i("OpenCV", "Failed");
+            return false;
+        }else{
+            Log.i("OpenCV", "successfully built !");
+            return true;
+        }
+    }
 }

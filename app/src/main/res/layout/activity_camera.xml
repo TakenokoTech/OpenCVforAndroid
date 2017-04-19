@@ -16,24 +16,28 @@
         opencv:show_fps="true" />
 
     <android.support.v7.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/threshold1_up"
-            android:text="+"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="+" />
+
         <TextView
             android:id="@+id/threshold1_text"
-            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white" />
+
         <Button
             android:id="@+id/threshold1_down"
-            android:text="-"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="-" />
     </android.support.v7.widget.LinearLayoutCompat>
 
 
