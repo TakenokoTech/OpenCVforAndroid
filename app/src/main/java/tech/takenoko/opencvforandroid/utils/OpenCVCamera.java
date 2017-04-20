@@ -64,15 +64,13 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat mat = inputFrame.rgba();
-        Imgproc.Canny(mat, mOutputFrame, model.getThreshold1(), 100);
 //      Core.bitwise_not(mOutputFrame, mOutputFrame);
-        return mat;
+        return Canny(mat);
     }
 
     private Mat Canny(Mat rgba) {
-        Mat mat = rgba;
-        Imgproc.Canny(mat, mOutputFrame, model.getThreshold1(), 100);
-        return mat;
+        Imgproc.Canny(rgba, mOutputFrame, model.getThreshold1(), 100);
+        return mOutputFrame;
     }
 
     //=======================================
