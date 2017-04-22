@@ -14,6 +14,9 @@ import org.opencv.imgproc.Imgproc;
 import lombok.Getter;
 import tech.takenoko.opencvforandroid.model.OpenCVModel;
 
+import static org.opencv.core.Core.getNumThreads;
+import static org.opencv.core.Core.getNumberOfCPUs;
+
 /**
  * Created by takenoko on 2017/02/27.
  */
@@ -54,6 +57,8 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
     @Override
     public void onCameraViewStarted(int width, int height) {
         mOutputFrame = new Mat(height, width, CvType.CV_8UC1);
+        Log.i("getNumThreads: ", String.valueOf(getNumThreads()));
+        Log.i("getNumberOfCPUs: ", String.valueOf(getNumberOfCPUs()));
     }
 
     @Override
@@ -65,11 +70,12 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat mat = inputFrame.rgba();
 //      Core.bitwise_not(mOutputFrame, mOutputFrame);
-        return Canny(mat);
+        if(model.isEnableCanny()) mat = Canny(mat);
+        return mat;
     }
 
     private Mat Canny(Mat rgba) {
-        Imgproc.Canny(rgba, mOutputFrame, model.getThreshold1(), 100);
+        Imgproc.Canny(rgba, mOutputFrame, model.getThreshold1(), model.getThreshold2());
         return mOutputFrame;
     }
 

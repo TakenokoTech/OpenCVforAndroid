@@ -17,6 +17,10 @@ public class OpenCVModel extends baseModel implements Serializable {
     @Getter
     private int threshold2 = 100;
 
+    /** Canny有効 */
+    @Getter
+    private boolean enableCanny = false;
+
     public void add(String name) {
         switch (name) {
             case "threshold1":
@@ -36,6 +40,27 @@ public class OpenCVModel extends baseModel implements Serializable {
                 break;
             case "threshold2":
                 threshold2--;
+                break;
+            default:
+                break;
+        }
+    }
+    public void change(String name, int num) {
+        switch (name) {
+            case "threshold1":
+                threshold1 = num;
+                break;
+            case "threshold2":
+                threshold2 = num;
+                break;
+            default:
+                break;
+        }
+    }
+    public void change(String name, boolean bool) {
+        switch (name) {
+            case "canny":
+                enableCanny = bool;
                 break;
             default:
                 break;
