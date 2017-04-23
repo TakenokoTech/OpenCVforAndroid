@@ -12,8 +12,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="visible"
-        opencv:camera_id="front"
-        opencv:show_fps="true" />
+        opencv:camera_id="any"
+        opencv:show_fps="false" />
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -23,12 +23,25 @@
         android:id="@+id/linearLayoutCompat">
 
         <ToggleButton
+            android:id="@+id/toggle_of_camera_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:disabledAlpha="1"
+            android:textOn="Front"
+            android:textOff="Back" />
+        <ToggleButton
             android:id="@+id/toggle_of_canny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:disabledAlpha="0.5"
             android:textOn="Canny"
             android:textOff="Canny" />
+        <Button
+            android:id="@+id/shooting_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"/>
+
     </android.support.v7.widget.LinearLayoutCompat>
 
     <LinearLayout

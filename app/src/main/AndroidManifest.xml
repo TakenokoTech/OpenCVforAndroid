@@ -21,6 +21,9 @@
         <activity
             android:name=".view.CameraView"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".view.PreviewView"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
