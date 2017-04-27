@@ -30,7 +30,7 @@ import static org.opencv.android.CameraBridgeViewBase.CAMERA_ID_FRONT;
  * Created by takenoko on 2017/04/18.
  */
 
-public class CameraView extends Activity {
+public class CameraShootingView extends Activity {
 
     private OpenCVCamera openCVCamera;
 

@@ -18,7 +18,7 @@ import tech.takenoko.opencvforandroid.R;
  * Created by たけのこ on 2017/04/23.
  */
 
-public class PreviewView extends Activity{
+public class PreviewView extends Activity {
 
     @BindView(R.id.preview_view) ImageView imageView;
     @BindView(R.id.preview_submit_button) Button submitButton;

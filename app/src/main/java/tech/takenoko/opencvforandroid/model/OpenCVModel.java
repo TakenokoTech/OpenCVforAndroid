@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * Created by たけのこ on 2017/04/20.
  */
-public class OpenCVModel extends baseModel implements Serializable {
+public class OpenCVModel extends CustomBaseModel implements Serializable {
 
     /** 閾値1 */
     @Getter

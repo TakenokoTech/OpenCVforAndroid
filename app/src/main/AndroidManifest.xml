@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.CameraView"
+            android:name=".view.CameraShootingView"
             android:screenOrientation="landscape"/>
         <activity
             android:name=".view.PreviewView"

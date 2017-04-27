@@ -58,7 +58,7 @@ public class UtilCascade {
             mFaceDetector.detectMultiScale(rgba, faces, 1.1, 2, 2, mMinFaceSize, new Size());
             Rect[] facesArray = faces.toArray();
             for (int i = 0; i < facesArray.length; i++) {
-                extractedFaceMat = new Mat(rgba, facesArray[i]);
+                extractedFaceMat = new Mat(rgba, facesArray[i]).clone();;
                 Log.i("POINT", "x: " + facesArray[i].tl().x + "  y: " + facesArray[i].tl().y);
                 Log.i("POINT", "x: " + facesArray[i].br().x + "  y: " + facesArray[i].br().y);
                 Imgproc.rectangle(rgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);

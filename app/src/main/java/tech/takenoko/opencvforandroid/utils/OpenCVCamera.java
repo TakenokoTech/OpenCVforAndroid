@@ -85,12 +85,9 @@ public class OpenCVCamera implements CameraBridgeViewBase.CvCameraViewListener2 
     }
 
     public Bitmap convertToImage() {
-//        Mat src = mOutputFrame.clone();
         Mat src = utilCascade.getExtractedFaceMat();
-        Mat dst = new Mat();
-        Imgproc.cvtColor(src, dst, Imgproc.COLOR_BGR2RGBA, 4);
         Bitmap img = Bitmap.createBitmap(src.width(), src.height(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(dst, img);
+        Utils.matToBitmap(src, img);
         return img;
     }
 
